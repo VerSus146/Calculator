@@ -12,7 +12,6 @@ namespace WindowsFormsApp1
 {
     public partial class Calculator : Form
     {
-        Form2 frm2;
 
         bool DotUsed;
 
@@ -21,8 +20,6 @@ namespace WindowsFormsApp1
         String LastAction;
 
         String MemorySlot;
-
-        float TMPValue;
 
         public Calculator()
         {
@@ -34,247 +31,92 @@ namespace WindowsFormsApp1
             Memorypanel.Visible = false;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void AddNumber(float Number)
         {
-
+            if (LastAction == "Equals" || LastAction == "Load")
+            {
+                _Text.Text = Number.ToString("R");
+                LastAction = "";
+            }
+            else if (_Text.Text == "0")
+            {
+                _Text.Text = Number.ToString("R");
+            }
+            else
+            {
+                _Text.Text += Number.ToString("R");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "3";
-                LastAction = "";
-            }
-            else if(_Text.Text == "0")
-            {
-                _Text.Text = "3";
-            } else
-            {
-                _Text.Text += "3";
-            } 
+            AddNumber(3);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "2";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "2";
-            } else
-            {
-                _Text.Text += "2";
-            }
+            AddNumber(2);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "1";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "1";
-            }
-            else
-            {
-                _Text.Text += "1";
-            }
+            AddNumber(1);
         }
 
         private void Nine_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "9";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "9";
-            }
-            else
-            {
-                _Text.Text += "9";
-            }
+            AddNumber(9);
         }
 
         private void Four_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "4";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "4";
-            }
-            else
-            {
-                _Text.Text += "4";
-            }
+            AddNumber(4);
         }
 
         private void Five_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "5";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "5";
-            }
-            else
-            {
-                _Text.Text += "5";
-            }
+            AddNumber(5);
         }
 
         private void Six_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "6";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "6";
-            }
-            else
-            {
-                _Text.Text += "6";
-            }
+            AddNumber(6);
         }
 
         private void Seven_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "7";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "7";
-            }
-            else
-            {
-                _Text.Text += "7";
-            }
+            AddNumber(7);
         }
 
         private void Eight_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "8";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "8";
-            }
-            else
-            {
-                _Text.Text += "8";
-            }
+            AddNumber(8);
         }
 
         private void Zero_Click(object sender, EventArgs e)
         {
-            if (LastAction == "Equals" || LastAction == "Load")
-            {
-                _Text.Text = "0";
-                LastAction = "";
-            } else if (_Text.Text == "0")
-            {
-                _Text.Text = "0";
-            }
-            else
-            {
-                _Text.Text += "0";
-            }
+            AddNumber(0);
         }
 
         private void Equals_Click(object sender, EventArgs e)
         {
-
-            if (LastAction == "Plus")
+            if(LastAction == "Plus")
             {
-                if(MemorySlot == "1")
-                {
-                    label3.Text = Value.ToString("R") + " + " + _Text.Text;
-                } else if (MemorySlot == "2")
-                {
-                    label2.Text = Value.ToString("R") + " + " + _Text.Text;
-                } else if(MemorySlot == "3")
-                {
-                    label1.Text = Value.ToString("R") + " + " + _Text.Text;
-                }
-
-                Value += float.Parse(_Text.Text);  
-                
+                SaveMemory("+");
             } else if(LastAction == "Minus")
             {
-                if (MemorySlot == "1")
-                {
-                    label3.Text = Value.ToString("R") + " - " + _Text.Text;
-                }
-                else if (MemorySlot == "2")
-                {
-                    label2.Text = Value.ToString("R") + " - " + _Text.Text;
-                }
-                else if (MemorySlot == "3")
-                {
-                    label1.Text = Value.ToString("R") + " - " + _Text.Text;
-                }
-
-                Value -= float.Parse(_Text.Text);
-
-            } else if(LastAction == "Times")
+                SaveMemory("-");
+            }
+            else if (LastAction == "Times")
             {
-                if (MemorySlot == "1")
-                {
-                    label3.Text = Value.ToString("R") + " * " + _Text.Text;
-                }
-                else if (MemorySlot == "2")
-                {
-                    label2.Text = Value.ToString("R") + " * " + _Text.Text;
-                }
-                else if (MemorySlot == "3")
-                {
-                    label1.Text = Value.ToString("R") + " * " + _Text.Text;
-                }
-  
-                Value *= float.Parse(_Text.Text);
-            } else if(LastAction == "Divide")
+                SaveMemory("*");
+            }
+            else if (LastAction == "Divide")
             {
-                if (MemorySlot == "1")
-                {
-                    label3.Text = Value.ToString("R") + " / " + _Text.Text;
-                }
-                else if (MemorySlot == "2")
-                {
-                    label2.Text = Value.ToString("R") + " / " + _Text.Text;
-                }
-                else if (MemorySlot == "3")
-                {
-                    label1.Text = Value.ToString("R") + " / " + _Text.Text;
-                }
-                
-                Value /= float.Parse(_Text.Text);
-            } else
-            {
-                LastAction = "Equals";
-                return;
+                SaveMemory("/");
             }
 
-            _Text.Text = Value.ToString("R");
-            Value = 0;
-            LastAction = "";
-            DotUsed = false;
+            Display();
 
             if (MemorySlot == "1")
             {
@@ -293,24 +135,46 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void Plus_Click(object sender, EventArgs e)
+        void Display()
+        {
+            _Text.Text = Value.ToString("R");
+            Value = 0;
+            LastAction = "";
+            DotUsed = false;
+        }
+
+        void SaveMemory(String Math)
         {
 
-            if(Value == 0)
-            {
-                Value = float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Plus";
-            } else
-            {
-                Value += float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Plus";
-            }
+                if (MemorySlot == "1")
+                {
+                    label3.Text = Value.ToString("R") + Math + _Text.Text;
+                }
+                else if (MemorySlot == "2")
+                {
+                    label2.Text = Value.ToString("R") + Math + _Text.Text;
+                }
+                else if (MemorySlot == "3")
+                {
+                    label1.Text = Value.ToString("R") + Math + _Text.Text;
+                }
 
-            TMPValue = Value;
+                if(Math == "+")
+                {
+                    Value += float.Parse(_Text.Text);
+                } else if (Math == "-")
+                {
+                    Value -= float.Parse(_Text.Text);
+                }
+                else if (Math == "*")
+                {
+                    Value *= float.Parse(_Text.Text);
+                }
+                else if (Math == "/")
+                {
+                    Value /= float.Parse(_Text.Text);
+                }
+
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -325,65 +189,48 @@ namespace WindowsFormsApp1
             
         }
 
+        private void Plus_Click(object sender, EventArgs e)
+        {
+            Math("Plus");
+        }
+
         private void Minus_Click(object sender, EventArgs e)
         {
-
-            if (Value == 0)
-            {
-                Value = float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Minus";
-            } else
-            {
-                Value -= float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Minus";
-            }
-
-            
+            Math("Minus");
         }
 
         private void Times_Click(object sender, EventArgs e)
         {
-
-            if (Value == 0)
-            {
-                Value = float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Times";
-            }
-            else
-            {
-                Value *= float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Times";
-            }
-
+            Math("Times");
         }
 
         private void Divide_Click(object sender, EventArgs e)
         {
+            Math("Divide");
+        }
 
+        void Math(String Math)
+        {
             if (Value == 0)
             {
                 Value = float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Divide";
             }
-            else
+            else if(Math == "Divide")
             {
                 Value /= float.Parse(_Text.Text);
-                TMPValue = Value;
-                _Text.Text = "0";
-                LastAction = "Times";
+            } else if(Math == "Times")
+            {
+                Value *= float.Parse(_Text.Text);
+            } else if(Math == "Minus")
+            {
+                Value -= float.Parse(_Text.Text);
+            } else if(Math == "Plus")
+            {
+                Value += float.Parse(_Text.Text);
             }
 
-            TMPValue = Value;
+            _Text.Text = "0";
+            LastAction = Math;
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -406,38 +253,24 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void Memory_Click(object sender, EventArgs e)
-        {
-            
-            Memorypanel.Visible = true;
-            kalkulacje.Visible = false;
-            Back.Visible = true;
-            _Text.Visible = false;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            _Text.Text = FirstSlotEquals.Text;
-            Memorypanel.Visible = false;
-            kalkulacje.Visible = true;
-            Back.Visible = false;
-            _Text.Visible = true;
-            LastAction = "Load";
+            LoadMath(FirstSlotEquals);
         }
 
         private void ThirdSlotButton_Click(object sender, EventArgs e)
         {
-            _Text.Text = ThirdSlotEquals.Text;
-            Memorypanel.Visible = false;
-            kalkulacje.Visible = true;
-            Back.Visible = false;
-            _Text.Visible = true;
-            LastAction = "Load";
+            LoadMath(ThirdSlotEquals);
         }
 
         private void SecondSaveButton_Click(object sender, EventArgs e)
         {
-            _Text.Text = SecondSlotEquals.Text;
+            LoadMath(SecondSlotEquals);
+        }
+
+        void LoadMath(Label slot)
+        {
+            _Text.Text = slot.Text;
             Memorypanel.Visible = false;
             kalkulacje.Visible = true;
             Back.Visible = false;
@@ -445,17 +278,32 @@ namespace WindowsFormsApp1
             LastAction = "Load";
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Back_Click(object sender, EventArgs e)
         {
-            Memorypanel.Visible = false;
-            kalkulacje.Visible = true;
-            Back.Visible = false;
-            _Text.Visible = true;
+            SwapPanels(true);
+        }
+
+        private void Memory_Click(object sender, EventArgs e)
+        {
+            SwapPanels(false);
+        }
+
+        void SwapPanels(bool calc)
+        {
+            if (!calc)
+            {
+                Memorypanel.Visible = true;
+                kalkulacje.Visible = false;
+                Back.Visible = true;
+                _Text.Visible = false;
+            }
+            else if (calc)
+            {
+                Memorypanel.Visible = false;
+                kalkulacje.Visible = true;
+                Back.Visible = false;
+                _Text.Visible = true;
+            }
         }
     }
 }
