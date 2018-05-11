@@ -172,6 +172,11 @@ namespace WindowsFormsApp1
                 }
                 else if (Math == "/")
                 {
+                    if(float.Parse(_Text.Text) == 0 || Value == 0)
+                    {
+                        _Text.Text = "NaN";
+                    }
+
                     Value /= float.Parse(_Text.Text);
                 }
 
